@@ -53,3 +53,16 @@ export type GoodsCategory = {
     image: string
 };
 
+export type MessageListItem = {
+    id: number;
+    avatarUrl: string;
+    lastMessage?: string;
+    lastMessageTime?: string;
+    name: string;
+}
+
+export type UnRead = {
+    unreadFavorate: number,
+    newFollow: number,
+    comment: number,
+};

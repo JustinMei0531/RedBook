@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { 
+import {
     View,
     Text,
     StyleSheet,
     Image,
     StatusBar,
     FlatList,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
  } from "react-native";
-import { useLocalObservable } from "mobx-react";
+import {observer, useLocalObservable} from "mobx-react";
+import { useNavigation } from "@react-navigation/native";
 
 import ShopStore from "../../stores/ShopStore";
 import iconSearch from "../../../assets/images/icon_search.png";
@@ -16,18 +18,24 @@ import iconCart from "../../../assets/images/icon_shop_car.png";
 import iconOrders from "../../../assets/images/icon_orders.png";
 import iconMenuMore from "../../../assets/images/icon_menu_more.png";
 import { GoodsSimple } from "../../stores/types";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 const {width: screenWidth} = Dimensions.get("window");
 const itemWidth = screenWidth - 18 >> 1;
 
-export default () => {
+const Shop = observer(() => {
 
     const store = useLocalObservable(() => new ShopStore());
-
+    const navigation = useNavigation<StackNavigationProp<any>>();
     useEffect(() => {
         store.requestGoodsList();
         store.requestTopCategory();
     }, []);
+
+    const onSearchPress = () => {
+        navigation.push("SearchGoods");
+        return;
+    };
 
     const renderTitle = () => {
         const titleStyle = StyleSheet.create({
@@ -65,10 +73,12 @@ export default () => {
         });
         return (
             <View style={titleStyle.titleLayout}>
-                <View style={titleStyle.searchLayout}>
+                <TouchableOpacity
+                    onPress={onSearchPress}
+                    style={titleStyle.searchLayout}>
                     <Image style={titleStyle.searchIcon} source={iconSearch}/>
                     <Text style={titleStyle.searchText}>Search items</Text>
-                </View>
+                </TouchableOpacity>
                 <Image source={iconCart} style={titleStyle.menuIcon}/>
                 <Image source={iconOrders} style={titleStyle.menuIcon}/>
                 <Image source={iconMenuMore} style={titleStyle.menuIcon}/>
@@ -129,13 +139,54 @@ export default () => {
     };
 
     const ListHeader = () => {
-
+        const {categoryList} = store;
+        const headerStyle = StyleSheet.create({
+            container: {
+                width: "100%",
+                flexDirection: "row",
+                flexWrap: "wrap"
+            },
+            categoryItem: {
+                width: "20%",
+                alignItems: "center",
+                paddingHorizontal: 16
+            },
+            itemImage: {
+                width: 40,
+                height: 40,
+                resizeMode: "contain",
+            },
+            itemText: {
+                fontSize: 14,
+                color: "#333333",
+                marginTop: 6
+            },
+        });
+        return (
+            <View style={headerStyle.container}>
+                {
+                    categoryList.map((item, index) => {
+                        return (
+                            <View style={headerStyle.categoryItem} key={index}>
+                                <Image
+                                    style={headerStyle.itemImage}
+                                    source={{uri: item.image}}
+                                />
+                                <Text style={headerStyle.itemText}>
+                                    {item.name}
+                                </Text>
+                            </View>
+                        );
+                    })
+                }
+            </View>
+        );
     };
 
     return (
         <View style={styles.root}>
             {renderTitle()}
-            <FlatList 
+            <FlatList
                 style={{flex: 1}}
                 data={store.goodsList}
                 extraData={store.categoryList}
@@ -146,7 +197,7 @@ export default () => {
             />
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     root: {
@@ -160,3 +211,5 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
 });
+
+export default Shop;

@@ -4,7 +4,7 @@ import { save } from "../utils/Storage";
 
 class UserStore{
 
-    private userInfo: any;
+    public userInfo: any;
 
     public requestLogin = flow(function*(
         this: UserStore,

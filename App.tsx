@@ -9,6 +9,7 @@ import Splash from "./src/modules/splash/Splash";
 import Login from "./src/modules/login/Login";
 import MainTab from './src/modules/main_tab/MainTab';
 import ArticleDetail from "./src/modules/article_detail/ArticleDetail";
+import SearchGoods from "./src/modules/search_goods/SearchGoods";
 
 // Create a root stack for router
 const Stack = createStackNavigator();
@@ -51,7 +52,15 @@ export default function App() {
                             headerShown: false
                         }}
                         name="ArticleDetail"
-                        component={ArticleDetail} />
+                        component={ArticleDetail}
+                    />
+                    <Stack.Screen
+                        name="SearchGoods"
+                        options={{
+                            headerShown: false,
+                            presentation: "transparentModal"
+                        }}
+                        component={SearchGoods} />
                 </Stack.Navigator>
 
             </NavigationContainer>

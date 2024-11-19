@@ -20,6 +20,14 @@ const Apis: ApiEndpoints = {
     url: "/goods/top10Category",
     method: "GET"
   },
+  messageList: {
+    url: "/message/messageList",
+    method: "GET"
+  },
+  unRead: {
+    url: "/message/unread",
+    method: "GET"
+  },
 };
 
 export default Apis;
