@@ -28,6 +28,23 @@ const Apis: ApiEndpoints = {
     url: "/message/unread",
     method: "GET"
   },
+  accountInfo: {
+    url: "/mine/accountInfo",
+    method: "GET"
+  },
+  noteList: {
+    url: "/mine/noteList",
+    method: "GET"
+  },
+  collectionList: {
+    url: "/mine/collectionList",
+    method: "GET"
+
+  },
+  favoriteList: {
+    url: "/mine/favorateList",
+    method: "GET"
+  },
 };
 
 export default Apis;

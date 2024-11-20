@@ -66,3 +66,13 @@ export type UnRead = {
     newFollow: number,
     comment: number,
 };
+
+export type UserInfo = {
+    name: string,
+    avatar: string,
+    desc: string,
+    sex: string,
+    redBookId: string,
+    location: string,
+    nickName: string
+};

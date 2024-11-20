@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
+    StatusBar,
     GestureResponderEvent
 } from 'react-native'
 import { useLocalObservable } from 'mobx-react';
@@ -36,7 +37,7 @@ export default observer(() => {
     const renderTitle = () => {
         return (
             <View style={styles.titleLayout}>
-                <Text style={styles.titleTxt}>消息</Text>
+                <Text style={styles.titleTxt}>Message</Text>
                 <TouchableOpacity
                     style={styles.groupButton}
                     onPress={(event: GestureResponderEvent) => {
@@ -45,7 +46,7 @@ export default observer(() => {
                     }}
                 >
                     <Image style={styles.iconGroup} source={icon_group} />
-                    <Text style={styles.groupTxt}>群聊</Text>
+                    <Text style={styles.groupTxt}>Group Chat</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -160,21 +161,21 @@ export default observer(() => {
                         <Image style={styles.itemImg} source={icon_star} />
                         {!!unread?.unreadFavorate && <UnRead count={unread?.unreadFavorate} />}
                     </View>
-                    <Text style={styles.itemTxt}>赞和收藏</Text>
+                    <Text style={styles.itemTxt}>Likes</Text>
                 </View>
                 <View style={styles.headerItem}>
                     <View>
                         <Image style={styles.itemImg} source={icon_new_follow} />
                         {!!unread?.newFollow && <UnRead count={unread?.newFollow} />}
                     </View>
-                    <Text style={styles.itemTxt}>新增关注</Text>
+                    <Text style={styles.itemTxt}>New Followers</Text>
                 </View>
                 <View style={styles.headerItem}>
                     <View>
                         <Image style={styles.itemImg} source={icon_comments} />
                         {!!unread?.comment && <UnRead count={unread?.comment} />}
                     </View>
-                    <Text style={styles.itemTxt}>评论和@</Text>
+                    <Text style={styles.itemTxt}>Comments and @</Text>
                 </View>
             </View>
         );
@@ -201,7 +202,8 @@ const styles = StyleSheet.create({
     root: {
         width: '100%',
         height: '100%',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        
     },
     titleLayout: {
         width: '100%',
@@ -209,6 +211,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: StatusBar.currentHeight || 0,
     },
     titleTxt: {
         fontSize: 18,
