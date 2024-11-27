@@ -55,7 +55,7 @@ export default () => {
                     <TextInput
                         ref={inputRef}
                         style={styles.searchTxt}
-                        placeholder='纯粮小麦粉'
+                        placeholder='Search Products'
                         placeholderTextColor={'#bbb'}
                     />
                 </View>

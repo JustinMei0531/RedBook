@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from "react-native";
 
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 
 // Logo image of splash screen

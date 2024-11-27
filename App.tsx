@@ -1,9 +1,7 @@
-import { StyleSheet, Text, View} from 'react-native';
-import {SafeAreaProvider} from "react-native-safe-area-context";
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-
-import {StatusBar} from "expo-status-bar";
 
 import Splash from "./src/modules/splash/Splash";
 import Login from "./src/modules/login/Login";
